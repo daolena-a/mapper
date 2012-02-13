@@ -8,13 +8,6 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
 import java.util.Set;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 08/02/12
- * Time: 09:33
- * To change this template use File | Settings | File Templates.
- */
 @SupportedAnnotationTypes(
         "org.mapper.annotation.MappedBy")
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
