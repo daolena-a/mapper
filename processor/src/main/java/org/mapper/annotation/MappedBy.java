@@ -12,10 +12,10 @@ import java.lang.annotation.Target;
  * Time: 09:08
  * To change this template use File | Settings | File Templates.
  */
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface MappedBy {
-    Class<?> targetedClass();
+   public Class<?> targetedClass();
 
 
 }
