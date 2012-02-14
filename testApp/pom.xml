@@ -46,6 +46,22 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>src/main/java/org/mapper/test/gen</directory>
+                            <followSymlinks>false</followSymlinks>
+                            <excludes>
+                                <exclude>**/.git/**</exclude>
+                            </excludes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
                 <executions>
@@ -73,6 +89,7 @@
                     <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>

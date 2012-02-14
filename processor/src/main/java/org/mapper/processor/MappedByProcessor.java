@@ -1,6 +1,7 @@
 package org.mapper.processor;
 
 import org.mapper.annotation.MappedBy;
+import org.mapper.annotation.MappedByField;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
@@ -28,23 +29,34 @@ public class MappedByProcessor extends AbstractProcessor {
                 try {
 
                     Class clazz = Class.forName(elem.asType().toString());
-                    System.out.println("name"+clazz.getCanonicalName());
+                    System.out.println("./processor/src/main/java/org/mapper/gen/name"+clazz.getCanonicalName());
                     anno =(MappedBy) clazz.getAnnotation(MappedBy.class);
                     if(anno == null) break;
-                    File mappingFile = new File(clazz.getSimpleName()+"To"+anno.targetedClass().getSimpleName()+".java");
+                    File mappingFile = new File("./testApp/src/main/java/org/mapper/test/gen/"+clazz.getSimpleName()+"To"+anno.targetedClass().getSimpleName()+".java");
                     if(mappingFile.exists()){
                         mappingFile.delete();
                     }
                     mappingFile.createNewFile();
                     PrintWriter writer = new PrintWriter(mappingFile);
-                    writer.println("package org.mapper.gen");
+                    writer.println("package org.mapper.test.gen;");
                     writer.println();
                     writer.println("import "+clazz.getCanonicalName()+";");
-                    writer.println("import "+anno.targetedClass()+";");
+                    writer.println("import "+anno.targetedClass().getCanonicalName()+";");
                     writer.println("public class "+clazz.getSimpleName()+"To"+anno.targetedClass().getSimpleName()+"{");
-                    for (Field f : clazz.getFields()){
+                    writer.println("public "+clazz.getSimpleName()+" convert("+anno.targetedClass().getSimpleName()+" value){");
+                    writer.println(clazz.getSimpleName()+" result = new "+clazz.getSimpleName()+"();");
+                    MappedByField annoField;
+                    for (Field f : clazz.getDeclaredFields()){
+                        annoField = (MappedByField) f.getAnnotation(MappedByField.class);
+                        if (annoField == null) break;
+                        if(annoField.fieldName() != null && annoField.fieldName().length() > 0)
+                            writer.println("result.set"+camelCase(f.getName())+"(value.get"+camelCase(annoField.fieldName())+"());");
+                        else{
+                            writer.println("result.set"+camelCase(f.getName())+"(value.get"+camelCase(f.getName())+"());");
+                        }
 
                     }
+                    writer.println("return result;}");
                     writer.println("}");
                     writer.flush();
                     //package
@@ -61,5 +73,9 @@ public class MappedByProcessor extends AbstractProcessor {
 
         }
         return true;
+    }
+    private String camelCase(String value){
+       return  value.substring(0,1).toUpperCase() + value.substring(1);
+
     }
 }
