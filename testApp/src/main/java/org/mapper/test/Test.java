@@ -3,7 +3,7 @@ package org.mapper.test;
 
 import org.mapper.annotation.MappedBy;
 import org.mapper.annotation.MappedByField;
-import org.mapper.test.gen.TestToTestMapped;
+//import org.mapper.test.gen.TestToTestMapped;
 
 @MappedBy(targetedClass = TestMapped.class)
 public class Test {
@@ -28,11 +28,11 @@ public class Test {
     public void setField2(String field2) {
         this.field2 = field2;
     }
-    public static void main(String[] args){
+   /* public static void main(String[] args){
         TestMapped test = new TestMapped();
         test.setField1("field1");
         test.setFieldDifferent("field2");
       Test t =  new TestToTestMapped().convert(test);
        System.out.println(t.getField1() + t.getField2());
-    }
+    }*/
 }
