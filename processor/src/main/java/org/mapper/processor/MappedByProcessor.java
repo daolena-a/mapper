@@ -29,6 +29,7 @@ public class MappedByProcessor extends AbstractProcessor {
         MappedBy anno;
         ClassWriter classWriter;
         System.out.println("processor");
+
         for(Element elem : roundEnv.getElementsAnnotatedWith(MappedBy.class)){
 
             Class<?> clazz = null;

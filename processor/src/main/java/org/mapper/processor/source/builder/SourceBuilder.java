@@ -30,6 +30,7 @@ public class SourceBuilder<T> {
         source.addLine("package org.mapper.test.gen;");
         source.addLine("");
         source.addLine("import "+clazz.getCanonicalName()+";");
+        source.addLine("import org.mapper.test.gen.*;");
         source.addLine("import "+anno.targetedClass().getCanonicalName()+";");
         source.addLine("public class "+clazz.getSimpleName()+"To"+anno.targetedClass().getSimpleName()+"{");
         source.addLine("public static "+clazz.getSimpleName()+" convert("+anno.targetedClass().getSimpleName()+" value){");
@@ -37,7 +38,15 @@ public class SourceBuilder<T> {
         MappedByField annoField;
         for (Field f : clazz.getDeclaredFields()){
             annoField = (MappedByField) f.getAnnotation(MappedByField.class);
-            if (annoField == null) break;
+            if(f.getClass().getAnnotation(MappedBy.class) != null){
+                new SourceBuilder().generateSourceCode(f.getClass());
+                if(annoField.fieldName() != null && annoField.fieldName().length() > 0)
+                    source.addLine("result.set"+camelCase(f.getName())+"("+f.getClass().getSimpleName()+"To"+f.getClass().getAnnotation(MappedBy.class).targetedClass().getSimpleName() +".convert(value.get"+camelCase(annoField.fieldName())+"()));");
+                else source.addLine("result.set"+camelCase(f.getName())+"("+f.getClass().getSimpleName()+"To"+f.getClass().getAnnotation(MappedBy.class).targetedClass().getSimpleName() +".convert(value.get"+camelCase(f.getName())+"()));");
+                continue;
+            }
+            if (annoField == null) continue;
+
             if(annoField.fieldName() != null && annoField.fieldName().length() > 0)
                 source.addLine("result.set"+camelCase(f.getName())+"(value.get"+camelCase(annoField.fieldName())+"());");
             else{
@@ -46,7 +55,35 @@ public class SourceBuilder<T> {
 
         }
         source.addLine("return result;}");
+
+        source.addLine("");
+        //reverse
+        source.addLine("public static "+anno.targetedClass().getSimpleName()+" convertReverse("+clazz.getSimpleName()+" value){");
+        source.addLine(anno.targetedClass().getSimpleName()+" result = new "+anno.targetedClass().getSimpleName()+"();");
+        for (Field f : clazz.getDeclaredFields()){
+            annoField = (MappedByField) f.getAnnotation(MappedByField.class);
+            if(f.getClass().getAnnotation(MappedBy.class) != null){
+                new SourceBuilder().generateSourceCode(f.getClass());
+                if(annoField.fieldName() != null && annoField.fieldName().length() > 0)
+                    source.addLine("result.set"+camelCase(f.getName())+"("+f.getClass().getSimpleName()+"To"+f.getClass()
+                            .getAnnotation(MappedBy.class).targetedClass().getSimpleName() +".convert(value.get"+
+                            camelCase(annoField.fieldName())+"()));");
+                else source.addLine("result.set"+camelCase(f.getName())+"("+f.getClass().getSimpleName()+"To"+f.getClass().getAnnotation(MappedBy.class).targetedClass().getSimpleName() +".convert(value.get"+camelCase(f.getName())+"()));");
+                continue;
+            }
+            if (annoField == null) continue;
+
+            if(annoField.fieldName() != null && annoField.fieldName().length() > 0)
+                source.addLine("result.set"+camelCase(annoField.fieldName())+"(value.get"+camelCase(f.getName())+"());");
+            else{
+                source.addLine("result.set"+camelCase(f.getName())+"(value.get"+camelCase(f.getName())+"());");
+            }
+
+        }
+        source.addLine("return result;}");
         source.addLine("}");
+        
+        
         ClassWriter classWriter = new ClassWriter("./testApp/src/main/java/org/mapper/test/gen/"+clazz.getSimpleName()+"To"+anno.targetedClass().getSimpleName()+".java");
         classWriter.writeClass(source);
         //package
