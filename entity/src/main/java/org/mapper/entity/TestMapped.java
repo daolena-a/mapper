@@ -1,4 +1,4 @@
-package org.mapper.test;
+package org.mapper.entity;
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,6 +10,15 @@ package org.mapper.test;
 public class TestMapped {
     private String field1;
     private String fieldDifferent;
+    private TestMappedComplex complex;
+
+    public TestMappedComplex getComplex() {
+        return complex;
+    }
+
+    public void setComplex(TestMappedComplex complex) {
+        this.complex = complex;
+    }
 
     public String getField1() {
         return field1;

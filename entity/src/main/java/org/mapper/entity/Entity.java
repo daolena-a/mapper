@@ -1,11 +1,11 @@
-package org.mapper.test;
+package org.mapper.entity;
 
 /**
  * Created by IntelliJ IDEA.
  * User: adrien.daolena
- * Date: 14/02/12
- * Time: 16:06
+ * Date: 15/02/12
+ * Time: 13:53
  * To change this template use File | Settings | File Templates.
  */
-public class TestMappedComplex {
+public class Entity {
 }

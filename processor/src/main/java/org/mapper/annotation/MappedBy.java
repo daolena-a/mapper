@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface MappedBy {
-   public Class<?> targetedClass();
+    public Class<?> targetedClass();
 
 
 }

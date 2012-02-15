@@ -1,4 +1,4 @@
-package org.mapper.test;
+package org.mapper.entity;
 
 
 import org.mapper.annotation.MappedBy;
@@ -12,6 +12,16 @@ public class Test {
     private String field1;
     @MappedByField(fieldName = "fieldDifferent")
     private String field2;
+    @MappedByField
+    private TestComplex complex;
+
+    public TestComplex getComplex() {
+        return complex;
+    }
+
+    public void setComplex(TestComplex complex) {
+        this.complex = complex;
+    }
 
     public String getField1() {
         return field1;

@@ -1,5 +1,6 @@
 package org.mapper.processor;
 
+import org.mapper.annotation.GenerationLauncher;
 import org.mapper.annotation.MappedBy;
 import org.mapper.annotation.MappedByField;
 import org.mapper.processor.source.builder.SourceBuilder;
@@ -20,7 +21,7 @@ import java.nio.file.Files;
 import java.util.Set;
 
 @SupportedAnnotationTypes(
-        "org.mapper.annotation.MappedBy")
+        "org.mapper.annotation.GenerationLauncher")
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 public class MappedByProcessor extends AbstractProcessor {
 
@@ -30,19 +31,24 @@ public class MappedByProcessor extends AbstractProcessor {
         ClassWriter classWriter;
         System.out.println("processor");
 
-        for(Element elem : roundEnv.getElementsAnnotatedWith(MappedBy.class)){
-
+        for(Element elem : roundEnv.getElementsAnnotatedWith(GenerationLauncher.class)){
             Class<?> clazz = null;
 
-            try {
-                System.out.println(elem.asType().toString());
-                clazz = Class.forName(elem.asType().toString());
-                System.out.println("got class");
-                SourceBuilder builder = new SourceBuilder();
-                builder.generateSourceCode(clazz);
-            } catch (ClassNotFoundException e) {
-                throw new IllegalStateException(e);
-            }
+            //elem.asType().
+            try{
+                clazz = Class.forName(elem.getAnnotation(GenerationLauncher.class).classToBeMapped()[0]);
+                System.out.println(clazz.getCanonicalName()+clazz.getDeclaredFields().length);
+
+            }catch(Exception e){e.printStackTrace();}
+//            try {
+//                System.out.println(elem.asType().toString());
+//                clazz = Class.forName(elem.asType().toString());
+//                System.out.println("got class");
+//                SourceBuilder builder = new SourceBuilder();
+//                builder.generateSourceCode(clazz);
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            }
 
         }
         return true;
