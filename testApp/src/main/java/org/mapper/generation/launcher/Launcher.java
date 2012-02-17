@@ -11,7 +11,8 @@ import org.mapper.annotation.GenerationLauncher;
  */
 @GenerationLauncher(
         classToBeMapped = {"org.mapper.entity.Test" ,
-        "org.mapper.entity.TestComplex"}
+        "org.mapper.entity.TestComplex"}, packageName = "org.converter", projectName = "testApp"
+
 )
 public class Launcher {
 

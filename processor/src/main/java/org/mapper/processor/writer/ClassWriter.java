@@ -25,7 +25,10 @@ public class ClassWriter {
             if(sourceFile.exists()){
                 sourceFile.delete();
             }
+            sourceFile.getParentFile().mkdirs();
             sourceFile.createNewFile();
+
+           // dir.mkdirs();
             writer = new PrintWriter(sourceFile);
         } catch (IOException io) {
             throw new IllegalArgumentException(io);

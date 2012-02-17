@@ -106,22 +106,24 @@ public class SourceBuilder<T> {
         generateImport();
         emptyLine();
         generateClass();
+
+        new ClassWriter("./"+mappingInformation.getModuleName()+"/src/main/java/"+convertToFilePathPackageName(mappingInformation.getPackageName())+"/"+mappingInformation.getClassName()+".java").writeClass(source);
        // source.addLine("public class "+clazz.getSimpleName()+"To"+anno.targetedClass().getSimpleName()+"{");
         //source.addLine("public static "+clazz.getSimpleName()+" convert("+anno.targetedClass().getSimpleName()+" value){");
         //source.addLine(clazz.getSimpleName()+" result = new "+clazz.getSimpleName()+"();");
     }
 
 
-    
+
     private void generateImport( ){
         //TODO check import validity
         for(String s : mappingInformation.getImports()){
-            source.addLine(s);
+            source.addLine("import "+s+".*;");
 
         }
     }
     private void generatePackage (){
-        source.addLine(mappingInformation.getPackageName());
+        source.addLine("package "+mappingInformation.getPackageName()+";");
     }
     private void emptyLine(){
         source.addLine("");
@@ -149,12 +151,15 @@ public class SourceBuilder<T> {
         endCodeBloc();
     }
     private void generateInstantiation(){
-        String instantiation=""+mappingInformation.getReturnedType()+" res = new "+mappingInformation.getReturnedType()+"()";
+        String instantiation=""+mappingInformation.getReturnedType()+" res = new "+mappingInformation.getReturnedType()+"();";
         source.addLine(instantiation);
     }
     private void generateSetter(TargetField field){
-        String setter = "res.set"+ StringUtil.upperCaseFirstLetter(field.getFieldName())+"(value.get"+StringUtil.upperCaseFirstLetter(field.getTargetFieldName())+")";
+        String setter = "res.set"+ StringUtil.upperCaseFirstLetter(field.getFieldName())+"(value.get"+StringUtil.upperCaseFirstLetter(field.getTargetFieldName())+"());";
 
         source.addLine(setter);
+    }
+    private String convertToFilePathPackageName(String packageName){
+        return packageName.replace(".","/");
     }
 }

@@ -17,6 +17,15 @@ public class MappingInformation {
     String packageName; // name of the package
     String returnedType; // Type convert(ParamType paramType)
     String paramType;
+    String moduleName;
+
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
 
     public String getReturnedType() {
         return returnedType;
