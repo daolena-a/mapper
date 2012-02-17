@@ -3,13 +3,7 @@ package org.mapper.processor.source.data;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 14/02/12
- * Time: 18:33
- * To change this template use File | Settings | File Templates.
- */
+
 public class MappingInformation {
     List<TargetField> mapping; //list of mapping between field
     List<String> imports; //  imports for the java file

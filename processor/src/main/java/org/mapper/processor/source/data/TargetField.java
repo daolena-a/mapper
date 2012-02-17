@@ -1,12 +1,6 @@
 package org.mapper.processor.source.data;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 15/02/12
- * Time: 09:04
- * To change this template use File | Settings | File Templates.
- */
+
 public class TargetField {
     String fieldName;
     String targetFieldName;

@@ -5,13 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 14/02/12
- * Time: 14:07
- * To change this template use File | Settings | File Templates.
- */
+
 public class Source {
     List<String> sourceCode;
     public Source(){

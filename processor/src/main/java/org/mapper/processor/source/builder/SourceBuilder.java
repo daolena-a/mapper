@@ -15,13 +15,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 14/02/12
- * Time: 14:03
- * To change this template use File | Settings | File Templates.
- */
+
 public class SourceBuilder<T> {
     ClassTree tree;
     Source source;

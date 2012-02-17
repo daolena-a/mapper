@@ -1,12 +1,5 @@
 package org.mapper.entity;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 13/02/12
- * Time: 15:51
- * To change this template use File | Settings | File Templates.
- */
 public class TestMapped {
     private String field1;
     private String fieldDifferent;
