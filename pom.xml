@@ -12,6 +12,7 @@
         <module>processor</module>
         <module>testApp</module>
         <module>entity</module>
+        <module>sourceCodeBuilder</module>
     </modules>
 
 </project>

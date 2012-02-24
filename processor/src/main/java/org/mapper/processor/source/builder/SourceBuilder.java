@@ -9,10 +9,16 @@ import org.mapper.processor.source.data.TargetField;
 import org.mapper.processor.source.tree.ClassTree;
 import org.mapper.processor.util.StringUtil;
 import org.mapper.processor.writer.ClassWriter;
+import org.sourcecode.builder.Builder;
+import org.sourcecode.builder.InstructionBuilder;
+import org.sourcecode.builder.MethodBuilder;
+import org.sourcecode.builder.data.AccessLevel;
+import org.sourcecode.builder.data.Params;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -101,6 +107,17 @@ public class SourceBuilder<T> {
         emptyLine();
         generateClass();
 
+        MethodBuilder m = new Builder().packageDeclaration(mappingInformation.getPackageName()).importsDeclaration(mappingInformation.getImports())
+                .classDeclaration(AccessLevel.PUBLIC, mappingInformation.getReturnedType()+"To"+mappingInformation.getParamType())
+                .methodDeclaration(AccessLevel.PUBLIC, mappingInformation.getReturnedType(), "convert",new Params(mappingInformation.getParamType(), "value"))
+                    .instruction()
+                        .type(mappingInformation.getReturnedType()).equals().object("res").end();
+
+        for(TargetField field : mappingInformation.getMapping()){
+            m.instruction().object("res").call("set"+field.getFieldName()).open().object("value").call("get"+field.getTargetFieldName());
+        }
+        m.close().close();
+
         new ClassWriter("./"+mappingInformation.getModuleName()+"/src/main/java/"+convertToFilePathPackageName(mappingInformation.getPackageName())+"/"+mappingInformation.getClassName()+".java").writeClass(source);
        // source.addLine("public class "+clazz.getSimpleName()+"To"+anno.targetedClass().getSimpleName()+"{");
         //source.addLine("public static "+clazz.getSimpleName()+" convert("+anno.targetedClass().getSimpleName()+" value){");
@@ -149,7 +166,9 @@ public class SourceBuilder<T> {
         source.addLine(instantiation);
     }
     private void generateSetter(TargetField field){
-        String setter = "res.set"+ StringUtil.upperCaseFirstLetter(field.getFieldName())+"(value.get"+StringUtil.upperCaseFirstLetter(field.getTargetFieldName())+"());";
+        String setter = new InstructionBuilder().object("res").call("set"+StringUtil.upperCaseFirstLetter(field.getFieldName()))
+                .open().object("value").call("get" + StringUtil.upperCaseFirstLetter(field.getTargetFieldName())).open().close().close().end();
+       // String setter = "res.set"+ StringUtil.upperCaseFirstLetter(field.getFieldName())+"(value.get"+StringUtil.upperCaseFirstLetter(field.getTargetFieldName())+"());";
 
         source.addLine(setter);
     }
