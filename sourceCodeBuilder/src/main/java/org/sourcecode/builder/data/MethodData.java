@@ -1,5 +1,8 @@
 package org.sourcecode.builder.data;
 
+import org.sourcecode.builder.LineGenerator;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +19,7 @@ public class MethodData {
     String returnType;
     List<Params> params;
     String name;
-    List<String> instructions;
+    List<InstructionData> instructions;
 
     public AccessLevel getLvl() {
         return lvl;
@@ -50,11 +53,27 @@ public class MethodData {
         this.name = name;
     }
 
-    public List<String> getInstructions() {
+    public List<InstructionData> getInstructions() {
         return instructions;
     }
 
-    public void setInstructions(List<String> instructions) {
+    public void setInstructions(List<InstructionData> instructions) {
         this.instructions = instructions;
+    }
+    public List<String> toSource(){
+        List<String> source = new ArrayList<String>();
+        LineGenerator l = new LineGenerator().addKeyWord(getLvl().getValue())
+                .addData(getReturnType())
+                .addData(getName()).left();
+        for(Params p : getParams()){
+            l.addData(p.getType()).addData(p.getVal());
+        }
+        l.right().startBloc();
+        source.add(l.toString());
+        for(InstructionData instruction : getInstructions()){
+            source.add(new LineGenerator().addData(instruction.getSourceCode()).semicolon().toString());
+        }
+        source.add(new LineGenerator().endBloc().toString());
+        return source;
     }
 }

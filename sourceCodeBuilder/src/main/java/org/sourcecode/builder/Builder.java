@@ -29,10 +29,13 @@ public class Builder { //implements IBuilder {
         return this;
     }
     
-    public List<String> generateSource(){
+    public List<String> toSource(){
         List<String> source = new ArrayList<String>();
 
         source.add(new LineGenerator().addKeyWord("package").space().value(sourceFile.getPackageName()).toString());
+        for(String s : sourceFile.getImports()){
+            source.add( new LineGenerator().addKeyWord("import").addData(s).toString());
+        }
         return source;
     }
 

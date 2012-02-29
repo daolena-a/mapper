@@ -34,15 +34,28 @@ public class LineGenerator {
         line.append(" ").append(word);
         return this;
     }
+    public LineGenerator addData(String word){
+        line.append(" ").append(word);
+        return this;
+    }
     public LineGenerator param(List<Params> param){
         for(Params p : param){
             addKeyWord(p.getType()).addKeyWord(p.getVal());
         }
         return this;
     }
-    public String end(){
-        return line.append(";").toString();
+    public LineGenerator semicolon(){
+         line.append(";");
+        return this;
 
+    }
+    public LineGenerator startBloc(){
+        line.append("{");
+        return this;
+    }
+    public LineGenerator endBloc(){
+        line.append("}");
+        return this;
     }
 
     @Override

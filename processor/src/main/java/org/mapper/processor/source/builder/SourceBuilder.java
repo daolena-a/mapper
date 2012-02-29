@@ -166,11 +166,11 @@ public class SourceBuilder<T> {
         source.addLine(instantiation);
     }
     private void generateSetter(TargetField field){
-        String setter = new InstructionBuilder().object("res").call("set"+StringUtil.upperCaseFirstLetter(field.getFieldName()))
-                .open().object("value").call("get" + StringUtil.upperCaseFirstLetter(field.getTargetFieldName())).open().close().close().end();
+       // String setter = new InstructionBuilder().object("res").call("set"+StringUtil.upperCaseFirstLetter(field.getFieldName()))
+         //       .open().object("value").call("get" + StringUtil.upperCaseFirstLetter(field.getTargetFieldName())).open().close().close().end();
        // String setter = "res.set"+ StringUtil.upperCaseFirstLetter(field.getFieldName())+"(value.get"+StringUtil.upperCaseFirstLetter(field.getTargetFieldName())+"());";
 
-        source.addLine(setter);
+       // source.addLine(setter);
     }
     private String convertToFilePathPackageName(String packageName){
         return packageName.replace(".","/");

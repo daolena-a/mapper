@@ -1,5 +1,6 @@
 package org.sourcecode.builder;
 
+import org.sourcecode.builder.data.InstructionData;
 import org.sourcecode.builder.data.Params;
 
 /**
@@ -48,7 +49,7 @@ public class InstructionBuilder {
     }
     public MethodBuilder end(){
         instruction.append(";");
-        builder.getMethod().getInstructions().add(instruction.toString());
+        builder.getMethod().getInstructions().add(new InstructionData(instruction.toString()));
 
         return builder;
     }

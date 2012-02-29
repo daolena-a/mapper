@@ -2,6 +2,7 @@ package org.sourcecode.builder;
 
 import org.sourcecode.builder.data.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,4 +61,5 @@ public class ClassBuilder {
     public Builder close(){
         return builder;
     }
+
 }

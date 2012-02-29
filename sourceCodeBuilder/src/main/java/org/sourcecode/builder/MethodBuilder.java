@@ -1,6 +1,11 @@
 package org.sourcecode.builder;
 
+import org.sourcecode.builder.data.InstructionData;
 import org.sourcecode.builder.data.MethodData;
+import org.sourcecode.builder.data.Params;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,4 +42,5 @@ public class MethodBuilder {
     public InstructionBuilder instruction(){
         return new InstructionBuilder(this);
     }
+
 }

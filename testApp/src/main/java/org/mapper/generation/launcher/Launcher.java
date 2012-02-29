@@ -17,3 +17,4 @@ import org.mapper.annotation.GenerationLauncher;
 public class Launcher {
 
 }
+

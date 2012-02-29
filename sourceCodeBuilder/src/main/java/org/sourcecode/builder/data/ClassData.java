@@ -1,5 +1,8 @@
 package org.sourcecode.builder.data;
 
+import org.sourcecode.builder.LineGenerator;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,5 +53,11 @@ public class ClassData {
 
     public void setMethods(List<MethodData> methods) {
         this.methods = methods;
+    }
+    public List<String> toSource(){
+        List<String> sources = new ArrayList<String>();
+        StringBuilder sb = new StringBuilder();
+        new LineGenerator().addKeyWord(getLvl().getValue()).addKeyWord("class").addData(getName()).startBloc();
+        return sources;
     }
 }
