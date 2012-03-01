@@ -21,6 +21,11 @@ public class MethodData {
     String name;
     List<InstructionData> instructions;
 
+    public MethodData(){
+        params = new ArrayList<Params>();
+        instructions = new ArrayList<InstructionData>();
+    }
+
     public AccessLevel getLvl() {
         return lvl;
     }
@@ -66,12 +71,12 @@ public class MethodData {
                 .addData(getReturnType())
                 .addData(getName()).left();
         for(Params p : getParams()){
-            l.addData(p.getType()).addData(p.getVal());
+            l.addData(p.toSource());
         }
         l.right().startBloc();
         source.add(l.toString());
         for(InstructionData instruction : getInstructions()){
-            source.add(new LineGenerator().addData(instruction.getSourceCode()).semicolon().toString());
+            source.add(new LineGenerator().addData(instruction.getSourceCode()).toString());
         }
         source.add(new LineGenerator().endBloc().toString());
         return source;

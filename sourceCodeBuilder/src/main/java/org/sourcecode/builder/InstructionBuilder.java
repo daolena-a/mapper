@@ -35,15 +35,19 @@ public class InstructionBuilder {
         instruction.append(type);
         return this;
     }
+    public InstructionBuilder returnKeyWord(){
+        instruction.append(" return ");
+        return this;
+    }
     public InstructionBuilder equals (){
         instruction.append(" = ");
         return this;
     }
-    public InstructionBuilder open(){
+    public InstructionBuilder left(){
         instruction.append("(");
         return this;
     }
-    public InstructionBuilder close(){
+    public InstructionBuilder right(){
         instruction.append(")");
         return this;
     }
@@ -52,6 +56,10 @@ public class InstructionBuilder {
         builder.getMethod().getInstructions().add(new InstructionData(instruction.toString()));
 
         return builder;
+    }
+    public InstructionBuilder newKeyWord(){
+        instruction.append(" ").append("new").append(" ");
+        return this;
     }
     public InstructionBuilder object(String objectName){
         instruction.append(" ").append(objectName);

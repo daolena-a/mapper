@@ -13,7 +13,9 @@ import java.util.List;
  */
 public class LineGenerator {
     StringBuilder line;
-
+    public LineGenerator(){
+        line = new StringBuilder();
+    }
     public LineGenerator left(){
         line.append("(");
         return this;

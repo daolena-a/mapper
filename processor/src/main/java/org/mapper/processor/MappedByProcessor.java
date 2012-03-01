@@ -53,8 +53,8 @@ public class MappedByProcessor extends AbstractProcessor {
                 mappingInformation.setModuleName("testApp");
 
                 List<String> imports = new ArrayList<String>();
-                imports.add(clazz.getPackage().getName());
-                imports.add(anno.targetedClass().getPackage().getName());
+                imports.add(clazz.getPackage().getName()+"."+clazz.getSimpleName());
+                imports.add(anno.targetedClass().getPackage().getName()+"."+anno.targetedClass().getSimpleName());
 
                 //getImport for clazz
                 for(Field f : clazz.getDeclaredFields()){

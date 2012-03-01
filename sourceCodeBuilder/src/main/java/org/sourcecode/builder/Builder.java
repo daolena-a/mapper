@@ -24,19 +24,17 @@ public class Builder { //implements IBuilder {
         sourceFile.getImports().addAll(imports);
         return this;
     }
+    public Builder importDeclaration (String importValue){
+        sourceFile.getImports().add(importValue);
+        return this;
+    }
     public Builder packageDeclaration (String packageName){
         sourceFile.setPackageName(packageName);
         return this;
     }
     
-    public List<String> toSource(){
-        List<String> source = new ArrayList<String>();
-
-        source.add(new LineGenerator().addKeyWord("package").space().value(sourceFile.getPackageName()).toString());
-        for(String s : sourceFile.getImports()){
-            source.add( new LineGenerator().addKeyWord("import").addData(s).toString());
-        }
-        return source;
+    public List<String> generateSource(){
+        return sourceFile.toSource();
     }
 
 

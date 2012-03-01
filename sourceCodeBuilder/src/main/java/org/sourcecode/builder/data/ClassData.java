@@ -18,7 +18,13 @@ public class ClassData {
     List<FieldData> fields;
     List<MethodData> methods;
 
+    public ClassData(){
+        fields = new ArrayList<FieldData>();
+        methods = new ArrayList<MethodData>();
+    }
+
     public ClassData(AccessLevel lvl, String name) {
+        this();
         this.lvl = lvl;
         this.name = name;
     }
@@ -57,7 +63,14 @@ public class ClassData {
     public List<String> toSource(){
         List<String> sources = new ArrayList<String>();
         StringBuilder sb = new StringBuilder();
-        new LineGenerator().addKeyWord(getLvl().getValue()).addKeyWord("class").addData(getName()).startBloc();
+        sources.add(new LineGenerator().addKeyWord(getLvl().getValue()).addKeyWord("class").addData(getName()).startBloc().toString());
+        for(FieldData m : getFields()){
+            sources.add(m.toSource());
+        }
+        for(MethodData m : getMethods()){
+            sources.addAll(m.toSource());
+        }
+        sources.add(new LineGenerator().endBloc().toString());
         return sources;
     }
 }

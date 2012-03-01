@@ -1,5 +1,10 @@
 package org.sourcecode.builder.data;
 
+import org.sourcecode.builder.LineGenerator;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: adrien.daolena
@@ -28,5 +33,10 @@ public class Params {
 
     public void setVal(String val) {
         this.val = val;
+    }
+    public String toSource(){
+
+        return new LineGenerator().addData(type).space().addData(val).toString();
+
     }
 }

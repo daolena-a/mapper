@@ -102,22 +102,23 @@ public class SourceBuilder<T> {
 //        //className
 //        //interface?
 
-        generatePackage();
-        generateImport();
-        emptyLine();
-        generateClass();
-
-        MethodBuilder m = new Builder().packageDeclaration(mappingInformation.getPackageName()).importsDeclaration(mappingInformation.getImports())
+       // generatePackage();
+       // generateImport();
+       // emptyLine();
+       // generateClass();
+        Builder b =new Builder();
+        MethodBuilder m = b.packageDeclaration(mappingInformation.getPackageName()).importsDeclaration(mappingInformation.getImports())
                 .classDeclaration(AccessLevel.PUBLIC, mappingInformation.getReturnedType()+"To"+mappingInformation.getParamType())
                 .methodDeclaration(AccessLevel.PUBLIC, mappingInformation.getReturnedType(), "convert",new Params(mappingInformation.getParamType(), "value"))
                     .instruction()
-                        .type(mappingInformation.getReturnedType()).equals().object("res").end();
+                        .type(mappingInformation.getReturnedType()).object("res").equals().newKeyWord().type(mappingInformation.getReturnedType()).left().right().end();
 
         for(TargetField field : mappingInformation.getMapping()){
-            m.instruction().object("res").call("set"+field.getFieldName()).open().object("value").call("get"+field.getTargetFieldName());
+            m.instruction().object("res").call("set"+StringUtil.upperCaseFirstLetter(field.getFieldName())).left().object("value").call("get"+StringUtil.upperCaseFirstLetter(field.getTargetFieldName())).left().right().right().end();
         }
+        m.instruction().returnKeyWord().object("res").end();
         m.close().close();
-
+        source.getSourceCode().addAll(b.generateSource());
         new ClassWriter("./"+mappingInformation.getModuleName()+"/src/main/java/"+convertToFilePathPackageName(mappingInformation.getPackageName())+"/"+mappingInformation.getClassName()+".java").writeClass(source);
        // source.addLine("public class "+clazz.getSimpleName()+"To"+anno.targetedClass().getSimpleName()+"{");
         //source.addLine("public static "+clazz.getSimpleName()+" convert("+anno.targetedClass().getSimpleName()+" value){");

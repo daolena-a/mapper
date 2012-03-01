@@ -40,6 +40,7 @@ public class MethodBuilder {
         return builder;
     }
     public InstructionBuilder instruction(){
+
         return new InstructionBuilder(this);
     }
 

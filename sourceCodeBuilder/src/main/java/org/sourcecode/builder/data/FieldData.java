@@ -1,5 +1,7 @@
 package org.sourcecode.builder.data;
 
+import org.sourcecode.builder.LineGenerator;
+
 /**
  * Created by IntelliJ IDEA.
  * User: adrien.daolena
@@ -9,7 +11,7 @@ package org.sourcecode.builder.data;
  */
 public class FieldData {
     AccessLevel lvl ;
-    String Type;
+    String type;
     String name;
     boolean generateGetter;
     boolean generateSetter;
@@ -39,11 +41,11 @@ public class FieldData {
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public void setType(String type) {
-        Type = type;
+        type = type;
     }
 
     public String getName() {
@@ -52,5 +54,8 @@ public class FieldData {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public String toSource(){
+        return new LineGenerator().addData(getType()).addData(getName()).toString();
     }
 }

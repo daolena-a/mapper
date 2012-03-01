@@ -11,10 +11,14 @@ public class Source {
     public Source(){
         sourceCode = new ArrayList<String>();
     }
+    public Source(List<String> source){
+        sourceCode = new ArrayList<String>();
+    }
     public void addLine(String line){
         sourceCode.add(line);
     }
     public List<String> getSourceCode(){
-        return Collections.unmodifiableList(sourceCode);
+        return sourceCode;
+        //return Collections.unmodifiableList(sourceCode);
     }
 }

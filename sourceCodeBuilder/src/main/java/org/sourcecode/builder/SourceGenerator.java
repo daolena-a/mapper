@@ -45,6 +45,7 @@ public class SourceGenerator {
         for(InstructionData i : instructions){
             sources.add(i.getSourceCode());
         }
+        return this;
     }
     private SourceGenerator generateMethodSignature(MethodData method){
        LineGenerator line = new LineGenerator();
