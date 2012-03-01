@@ -5,13 +5,7 @@ import org.sourcecode.builder.data.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 24/02/12
- * Time: 15:50
- * To change this template use File | Settings | File Templates.
- */
+
 public class ClassBuilder {
     ClassData clazzData;
     Builder builder;

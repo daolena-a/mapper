@@ -5,13 +5,7 @@ import org.sourcecode.builder.LineGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 22/02/12
- * Time: 14:58
- * To change this template use File | Settings | File Templates.
- */
+
 public class Params {
     String type;
     String val;

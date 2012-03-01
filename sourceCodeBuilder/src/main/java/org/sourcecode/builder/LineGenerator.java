@@ -4,13 +4,7 @@ import org.sourcecode.builder.data.Params;
 
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 22/02/12
- * Time: 18:24
- * To change this template use File | Settings | File Templates.
- */
+
 public class LineGenerator {
     StringBuilder line;
     public LineGenerator(){

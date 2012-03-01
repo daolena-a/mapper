@@ -7,13 +7,7 @@ import org.sourcecode.builder.data.Params;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 24/02/12
- * Time: 15:42
- * To change this template use File | Settings | File Templates.
- */
+
 public class MethodBuilder {
     MethodData method;
     ClassBuilder builder;

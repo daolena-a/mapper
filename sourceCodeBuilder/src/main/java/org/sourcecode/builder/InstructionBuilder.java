@@ -3,13 +3,7 @@ package org.sourcecode.builder;
 import org.sourcecode.builder.data.InstructionData;
 import org.sourcecode.builder.data.Params;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 23/02/12
- * Time: 17:03
- * To change this template use File | Settings | File Templates.
- */
+
 public class InstructionBuilder {
     StringBuilder instruction;
     MethodBuilder builder;

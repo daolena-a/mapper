@@ -2,13 +2,7 @@ package org.sourcecode.builder.data;
 
 import org.sourcecode.builder.LineGenerator;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 22/02/12
- * Time: 15:34
- * To change this template use File | Settings | File Templates.
- */
+
 public class FieldData {
     AccessLevel lvl ;
     String type;

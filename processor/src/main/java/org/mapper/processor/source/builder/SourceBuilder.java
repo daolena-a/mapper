@@ -114,7 +114,11 @@ public class SourceBuilder<T> {
                         .type(mappingInformation.getReturnedType()).object("res").equals().newKeyWord().type(mappingInformation.getReturnedType()).left().right().end();
 
         for(TargetField field : mappingInformation.getMapping()){
-            m.instruction().object("res").call("set"+StringUtil.upperCaseFirstLetter(field.getFieldName())).left().object("value").call("get"+StringUtil.upperCaseFirstLetter(field.getTargetFieldName())).left().right().right().end();
+            if(field.isComplexType() == false)
+                m.instruction().object("res").call("set"+StringUtil.upperCaseFirstLetter(field.getFieldName())).left().object("value").call("get"+StringUtil.upperCaseFirstLetter(field.getTargetFieldName())).left().right().right().end();
+            else{
+                continue;
+            }
         }
         m.instruction().returnKeyWord().object("res").end();
         m.close().close();

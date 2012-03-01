@@ -7,13 +7,7 @@ import org.sourcecode.builder.data.MethodData;
 
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: adrien.daolena
- * Date: 22/02/12
- * Time: 18:13
- * To change this template use File | Settings | File Templates.
- */
+
 public class SourceGenerator {
     List<String> sources;
     private static String SPACE = " ";
